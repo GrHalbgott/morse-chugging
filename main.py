@@ -16,7 +16,7 @@ def main():
 
     logger.info("Generating MIDI file...")
     midi = midi_generator.morse_to_midi(
-        morse_data, args.tempo, file_manager.load_asset("midi_notes")[args.root_note]
+        morse_data, args.tempo, file_manager.load_asset("midi_notes")[args.root_note], args.song
     )
 
     logger.info("Saving MIDI file...")

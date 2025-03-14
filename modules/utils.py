@@ -64,6 +64,14 @@ def args_parser():
         help="Root note on guitar. Default: B0.",
         default="B0",
     )
+    optional_args.add_argument(
+        "--song",
+        dest="song",
+        type=bool,
+        metavar="\b",
+        help="Create full song (guitar, bass, drums)? Otherwise only one track. Default: False.",
+        default=False,
+    )
 
     return parser
 

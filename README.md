@@ -1,7 +1,7 @@
 # Morse to chugging
 
 Morse code is a beautiful thing - out of short and long notes, you can directly translate it to MIDI data.
-And this MIDI data, this rocks hard.
+And this MIDI data, it rocks hard.
 My dear people, it's time for some hard-hitting chugs!
 
 ## Installation
@@ -67,10 +67,9 @@ optional arguments:
   -o, --output_file     Name of output MIDI file. Default: midi_output.mid.
   -t, --tempo           Tempo of the MIDI file. Default: 142 bpm.
   -r, --root_note       Root note on guitar. Default: B0.
-  -s, --scale           Scale to be used. Default: None (stay at root note).
-  --octaves             Range of octaves to be included. Default: 1.
+  --song                Create full song (guitar, bass, drums)? Otherwise only one track. Default: False.
 ```
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License - see the [LICENSE file](./LICENSE) for details.
