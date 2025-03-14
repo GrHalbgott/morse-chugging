@@ -67,20 +67,15 @@ def args_parser():
     optional_args.add_argument(
         "--song",
         dest="song",
-        type=bool,
-        metavar="\b",
-        help="Create full song (guitar, bass, drums)? Otherwise only one track. Default: False.",
-        default=False,
+        action="store_true",
+        help="Create full song (guitar, bass, drums)? Otherwise only one track.",
     )
 
     return parser
 
 
 def init_logger(name, log_file_name=None):
-    """
-    Set up a logger instance with stream and file logger
-    :return:
-    """
+    """Set up a logger instance with stream and file logger."""
     logger = logging.getLogger(name)
     logger.setLevel(logging.INFO)
     logger.propagate = False

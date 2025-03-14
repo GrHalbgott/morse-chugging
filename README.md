@@ -1,6 +1,6 @@
 # Morse to chugging
 
-Morse code is a beautiful thing - out of short and long notes, you can directly translate it to MIDI data.
+Morse code is a beautiful thing - consisting solely of short and long notes, you can directly translate it to MIDI data.
 And this MIDI data, it rocks hard.
 My dear people, it's time for some hard-hitting chugs!
 
@@ -67,7 +67,7 @@ optional arguments:
   -o, --output_file     Name of output MIDI file. Default: midi_output.mid.
   -t, --tempo           Tempo of the MIDI file. Default: 142 bpm.
   -r, --root_note       Root note on guitar. Default: B0.
-  --song                Create full song (guitar, bass, drums)? Otherwise only one track. Default: False.
+  --song                Create full song (guitar, bass, drums)? Otherwise only one track.
 ```
 
 ## License
