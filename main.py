@@ -11,12 +11,12 @@ def main():
     logger = utils.init_logger("Morse to chugging")
     args = utils.args_parser().parse_args()
 
-    logger.info("Converting Morse code to MIDI...")
+    logger.info("Converting text to Morse code...")
     morse_data = utils.encode_to_morse(file_manager.load_from_file(args.input_file))
 
-    logger.info("Generating MIDI file...")
+    logger.info("Generating MIDI data...")
     midi = midi_generator.morse_to_midi(
-        morse_data, args.tempo, file_manager.load_asset("midi_notes")[args.root_note], args.song
+        morse_data, args.tempo, file_manager.load_asset("midi_notes")[args.root_note], args.song, args.scale
     )
 
     logger.info("Saving MIDI file...")

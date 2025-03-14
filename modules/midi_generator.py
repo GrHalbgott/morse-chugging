@@ -2,10 +2,13 @@
 # -*- coding: utf-8 -*-
 
 
+import random
 from midiutil import MIDIFile
 
+import modules.file_manager as file_manager
 
-def morse_to_midi(morse_code, tempo, root_note, song):
+
+def morse_to_midi(morse_code, tempo, root_note, song, scale):
     """Convert Morse code to a MIDI file."""
     if song:
         midi = MIDIFile(3)
@@ -16,6 +19,10 @@ def morse_to_midi(morse_code, tempo, root_note, song):
 
     sixteenth_note = 0.25
     eight_note = 0.5
+
+    if scale:
+        scale_notes = file_manager.load_asset("scales")[scale]
+        weights = [8 if num == 0 else 1 for num in scale_notes]
 
     time = 0
     for symbol in morse_code:
@@ -34,11 +41,16 @@ def morse_to_midi(morse_code, tempo, root_note, song):
         else:
             continue
 
+        if scale:
+            pitch = root_note + random.choices(scale_notes, weights=weights, k=1)[0]
+        else:
+            pitch = root_note
+
         if song:
             midi.addNote(
                 track=tracks["guitar"][0],
                 channel=tracks["guitar"][1],
-                pitch=root_note,
+                pitch=pitch,
                 time=time,
                 duration=duration,
                 volume=100,
@@ -46,7 +58,7 @@ def morse_to_midi(morse_code, tempo, root_note, song):
             midi.addNote(
                 track=tracks["bass"][0],
                 channel=tracks["bass"][1],
-                pitch=root_note - 12,
+                pitch=pitch - 12,
                 time=time,
                 duration=duration,
                 volume=100,
@@ -60,7 +72,7 @@ def morse_to_midi(morse_code, tempo, root_note, song):
                 volume=100,
             )
         else:
-            midi.addNote(track=0, channel=0, pitch=root_note, time=time, duration=duration, volume=100)
+            midi.addNote(track=0, channel=0, pitch=pitch, time=time, duration=duration, volume=100)
 
         time += duration  # Update time after adding the note
 

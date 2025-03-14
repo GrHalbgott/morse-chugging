@@ -23,7 +23,7 @@ def encode_to_morse(text):
 def args_parser():
     """Parse command line arguments."""
     parser = argparse.ArgumentParser(
-        description="Translate (text to) Morse code to a MIDI song full of chugging."
+        description="Translate (text to) Morse code to a MIDI song full of (melodic) chugging."
     )
     required_args = parser.add_argument_group("required arguments")
     optional_args = parser.add_argument_group("optional arguments")
@@ -61,8 +61,17 @@ def args_parser():
         dest="root_note",
         type=str,
         metavar="\b",
-        help="Root note on guitar. Default: B0.",
+        help="Root note on guitar (bass is an octave lower). Default: B0.",
         default="B0",
+    )
+    optional_args.add_argument(
+        "-s",
+        "--scale",
+        dest="scale",
+        type=str,
+        metavar="\b",
+        help="Snap to scale. Default: None (stay at root note).",
+        default=None,
     )
     optional_args.add_argument(
         "--song",
@@ -80,8 +89,8 @@ def init_logger(name, log_file_name=None):
     logger.setLevel(logging.INFO)
     logger.propagate = False
     formatter = logging.Formatter(
-        "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-        datefmt="%m-%d-%Y %I:%M:%S",
+        "%(asctime)s - %(levelname)s - %(message)s",
+        datefmt="%I:%M:%S",
     )
     # Add stream handler
     streamhandler = logging.StreamHandler()

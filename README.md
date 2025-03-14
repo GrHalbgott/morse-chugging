@@ -53,9 +53,9 @@ python main.py -i text.txt -t 169 -r C3
 
 ```shell
 python main.py -h
-usage: main.py [-h] -i [-o] [-t] [-r] [-s] [--octaves]
+usage: main.py [-h] -i [-o] [-t] [-r] [-s] [--song]
 
-Translate (text to) Morse code to a MIDI song full of chugging.
+Translate (text to) Morse code to a MIDI song full of (melodic) chugging.
 
 options:
   -h, --help            show this help message and exit
@@ -66,9 +66,31 @@ required arguments:
 optional arguments:
   -o, --output_file     Name of output MIDI file. Default: midi_output.mid.
   -t, --tempo           Tempo of the MIDI file. Default: 142 bpm.
-  -r, --root_note       Root note on guitar. Default: B0.
+  -r, --root_note       Root note on guitar (bass is an octave lower). Default: B0.
+  -s, --scale           Snap to scale. Default: None (stay at root note).
   --song                Create full song (guitar, bass, drums)? Otherwise only one track.
 ```
+
+### Available scales
+
+When using the `-s` flag, you have to provide a scale name as argument. Choose one of the following available scales:
+
+| Scale Name         | Notes as intervals from root note          |
+|--------------------|--------------------------------------------|
+| major              | [0, 2, 4, 5, 7, 9, 11]                     |
+| natural_minor      | [0, 2, 3, 5, 7, 8, 10]                     |
+| harmonic_minor     | [0, 2, 3, 5, 7, 8, 11]                     |
+| dorian             | [0, 2, 3, 5, 7, 9, 10]                     |
+| mixolydian         | [0, 2, 4, 5, 7, 9, 10]                     |
+| phrygian           | [0, 1, 3, 5, 7, 8, 10]                     |
+| lydian             | [0, 2, 4, 6, 7, 9, 11]                     |
+| locrian            | [0, 1, 3, 5, 6, 8, 10]                     |
+| pentatonic_major   | [0, 2, 4, 7, 9]                            |
+| pentatonic_minor   | [0, 3, 5, 7, 10]                           |
+| blues              | [0, 3, 5, 6, 7, 10]                        |
+| whole_tone1        | [0, 1, 3, 5, 7, 9, 11]                     |
+| whole_tone2        | [0, 2, 4, 6, 8, 10]                        |
+| chromatic          | [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]     |
 
 ## License
 
