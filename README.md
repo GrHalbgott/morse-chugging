@@ -43,34 +43,9 @@ poetry update
 
 ## Run the program
 
-There are multiple options to use the program, ranging from pure hard-hitting chugs in a song-like context to a somewhat random-sounding melody, directly usable in your DAW of choice.
+There are multiple options to use the program, ranging from pure hard-hitting chugs in a song-like context to a somewhat random-sounding melody, directly usable in your DAW of choice. Checkout the examples below.
 
-**Example 1: chugs song**:
-
-```shell
-python src/main.py -i example/example.txt -o example/chugs --song
-```
-
-Produces a track with three instruments (Guitar, Bass, Drums). The tempo is 142 bpm, the root note is B0 and the instruments only play the root note. The intro consists of a quarter note pause and two ride hits, each a quarter note long, then the chugging starts. On the first beat of every 4 bars, a crash is played, a china on every beat. For tracks longer than 12 bars, the drum introduces variability by looping through 8 bars of china cymbal and 8 bars of open hi-hat. The ending is a final hit of bass drum, snare, and a crash.
-
-
-**Example 2: melodic riffage**:
-
-```shell
-python src/main.py -i example/example.txt -o example/melodic_riffage -t 120 -r D2 -s harmonic_minor --song
-```
-
-Produces a track with three instruments (Guitar, Bass, Drums). The tempo is 120 bpm, the root note is D2 and the instruments play a melody based on the harmonic minor scale (root note still plays more often than the other notes). Otherwise similar song structure as above.
-
-**Example 3: melody creation**:
-
-```shell
-python src/main.py -i example/example.txt -o example/melody -t 80 -r E2 -s blues_minor
-```
-
-Produces a melody line played by a piano with tempo 80 bpm, root note E2 and in scale blues minor. All intro and outro pauses are omitted (so no song structure), making the melody ready to be used in you DAW of choice.
-
-**Usage**:
+### General usage
 
 ```shell
 python src/main.py -h
@@ -92,7 +67,32 @@ optional arguments:
   --song                Create full song (guitar, bass, drums)? Otherwise only one track (piano).
 ```
 
-> **Note**: Check the file [scales.json](./assets/scales.json) for all available scales.
+> **Note**: Conduct the file [scales.json](./assets/scales.json) for all available scales.
+
+### Example 1: chugs song
+
+```shell
+python src/main.py -i example/example.txt -o example/chugs --song
+```
+
+Produces a track with three instruments (Guitar, Bass, Drums). The tempo is 142 bpm, the root note is B0 and the instruments only play the root note. The intro consists of a quarter note pause and two ride hits, each a quarter note long, then the chugging starts. On the first beat of every 4 bars, a crash is played, a china on every beat. For tracks longer than 12 bars, the drum introduces variability by looping through 8 bars of china cymbal and 8 bars of open hi-hat. The ending is a final hit of bass drum, snare, and a crash.
+
+
+### Example 2: melodic riffage
+
+```shell
+python src/main.py -i example/example.txt -o example/melodic_riffage -t 120 -r D2 -s harmonic_minor --song
+```
+
+Produces a track with three instruments (Guitar, Bass, Drums). The tempo is 120 bpm, the root note is D2 and the instruments play a melody based on the harmonic minor scale (root note still plays more often than the other notes). Otherwise similar song structure as above.
+
+### Example 3: melody creation
+
+```shell
+python src/main.py -i example/example.txt -o example/melody -t 80 -r E2 -s blues_minor
+```
+
+Produces a melody line played by a piano with tempo 80 bpm, root note E2 and in scale blues minor. All intro and outro pauses are omitted (so no song structure), making the melody ready to be used in you DAW of choice.
 
 ## License
 
