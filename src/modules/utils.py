@@ -70,14 +70,14 @@ def args_parser():
         dest="scale",
         type=str,
         metavar="\b",
-        help="Snap to scale. Default: None (stay at root note).",
+        help="Scale to create melody. Default: None (stay at root note).",
         default=None,
     )
     optional_args.add_argument(
         "--song",
         dest="song",
         action="store_true",
-        help="Create full song (guitar, bass, drums)? Otherwise only one track.",
+        help="Create full song (guitar, bass, drums)? Otherwise only one track (piano).",
     )
 
     return parser
