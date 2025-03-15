@@ -75,7 +75,7 @@ optional arguments:
 python src/main.py -i example/example.txt -o example/chugs --song
 ```
 
-Produces a track with three instruments (Guitar, Bass, Drums). The tempo is 142 bpm, the root note is B0 and the instruments only play the root note. The intro consists of a quarter note pause and two ride hits, each a quarter note long, then the chugging starts. On the first beat of every 4 bars, a crash is played, a china on every beat. For tracks longer than 12 bars, the drum introduces variability by looping through 8 bars of china cymbal and 8 bars of open hi-hat. The ending is a final hit of bass drum, snare, and a crash.
+Produces a track with three instruments (Guitar, Bass, Drums). The tempo is 142 bpm, the root note is B0 and the instruments only play the root note. The intro consists of a half note pause and two ride hits, each a quarter note long, then the chugging starts. On the first beat of every 4 bars, a crash is played, a china on every beat. For tracks longer than 12 bars, the drum introduces variability by looping through 8 bars of china cymbal and 8 bars of open hi-hat. The ending is a final hit of bass drum, snare, and a crash.
 
 
 ### Example 2: melodic riffage
