@@ -19,7 +19,7 @@ class MorseToMidi:
         self.sixteenth_note = 0.25
         self.eight_note = 0.5
         self.half_note = 2
-        self.intro_pause = 3 if song else 0
+        self.intro_pause = 4 if song else 0
         self.midi, self.tracks = self.create_midi_file()
 
         self.drum_notes = {
@@ -71,7 +71,7 @@ class MorseToMidi:
 
     def enhance_drums(self, total_time):
         # First hits
-        for time in range(1, self.intro_pause):
+        for time in range(2, self.intro_pause):
             self.midi.addNote(
                 track=self.tracks["drums"][0],
                 channel=self.tracks["drums"][1],
