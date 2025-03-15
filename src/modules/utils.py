@@ -23,7 +23,7 @@ def encode_to_morse(text):
 def args_parser():
     """Parse command line arguments."""
     parser = argparse.ArgumentParser(
-        description="Translate (text to) Morse code to a MIDI song full of (melodic) chugging."
+        description="Translate (text to) Morse code to a MIDI track full of (melodic) chugging."
     )
     required_args = parser.add_argument_group("required arguments")
     optional_args = parser.add_argument_group("optional arguments")

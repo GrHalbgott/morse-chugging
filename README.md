@@ -1,4 +1,4 @@
-# Morse to chugging
+# Morse to (melodic) chugging
 
 Morse code is a beautiful thing - consisting solely of short and long notes, you can directly translate it to MIDI data.
 And this MIDI data, it rocks hard.
@@ -43,11 +43,32 @@ poetry update
 
 ## Run the program
 
-**Example**:
+There are multiple options to use the program, ranging from pure hard-hitting chugs in a song-like context to a somewhat random-sounding melody, directly usable in your DAW of choice.
+
+**Example 1: chugs song**:
 
 ```shell
-python src/main.py -i example/example.txt -t 120 -r E2 -s harmonic_minor --song
+python src/main.py -i example/example.txt -o example/chugs --song
 ```
+
+Produces a track with three instruments (Guitar, Bass, Drums). The tempo is 142 bpm, the root note is B0 and the instruments only play the root note. The intro consists of a quarter note pause and two ride hits, each a quarter note long, then the chugging starts. On the first beat of every 4 bars, a crash is played, a china on every beat. For tracks longer than 12 bars, the drum introduces variability by looping through 8 bars of china cymbal and 8 bars of open hi-hat. The ending is a final hit of bass drum, snare, and a crash.
+
+
+**Example 2: melodic riffage**:
+
+```shell
+python src/main.py -i example/example.txt -o example/melodic_riffage -t 120 -r D2 -s harmonic_minor --song
+```
+
+Produces a track with three instruments (Guitar, Bass, Drums). The tempo is 120 bpm, the root note is D2 and the instruments play a melody based on the harmonic minor scale (root note still plays more often than the other notes). Otherwise similar song structure as above.
+
+**Example 3: melody creation**:
+
+```shell
+python src/main.py -i example/example.txt -o example/melody -t 80 -r E2 -s blues_minor
+```
+
+Produces a melody line played by a piano with tempo 80 bpm, root note E2 and in scale blues minor. All intro and outro pauses are omitted (so no song structure), making the melody ready to be used in you DAW of choice.
 
 **Usage**:
 
@@ -55,7 +76,7 @@ python src/main.py -i example/example.txt -t 120 -r E2 -s harmonic_minor --song
 python src/main.py -h
 usage: src/main.py [-h] -i [-o] [-t] [-r] [-s] [--song]
 
-Translate (text to) Morse code to a MIDI song full of (melodic) chugging.
+Translate (text to) Morse code to a MIDI track full of (melodic) chugging.
 
 options:
   -h, --help            show this help message and exit
@@ -67,31 +88,11 @@ optional arguments:
   -o, --output_file     Name of output MIDI file. Default: example/midi_output.
   -t, --tempo           Tempo of the MIDI file. Default: 142 bpm.
   -r, --root_note       Root note on guitar (bass is an octave lower). Default: B0.
-  -s, --scale           Snap to scale. Default: None (stay at root note).
-  --song                Create full song (guitar, bass, drums)? Otherwise only one track.
+  -s, --scale           Scale to create melody. Default: None (stay at root note).
+  --song                Create full song (guitar, bass, drums)? Otherwise only one track (piano).
 ```
 
-<details>
-    <summary><b>Available scales</b></summary>
-
-| Scale Name         | Notes as intervals from root note          |
-|--------------------|--------------------------------------------|
-| major              | [0, 2, 4, 5, 7, 9, 11]                     |
-| minor              | [0, 2, 3, 5, 7, 8, 10]                     |
-| harmonic_minor     | [0, 2, 3, 5, 7, 8, 11]                     |
-| dorian             | [0, 2, 3, 5, 7, 9, 10]                     |
-| mixolydian         | [0, 2, 4, 5, 7, 9, 10]                     |
-| phrygian           | [0, 1, 3, 5, 7, 8, 10]                     |
-| lydian             | [0, 2, 4, 6, 7, 9, 11]                     |
-| locrian            | [0, 1, 3, 5, 6, 8, 10]                     |
-| pentatonic_major   | [0, 2, 4, 7, 9]                            |
-| pentatonic_minor   | [0, 3, 5, 7, 10]                           |
-| blues              | [0, 3, 5, 6, 7, 10]                        |
-| whole_tone1        | [0, 1, 3, 5, 7, 9, 11]                     |
-| whole_tone2        | [0, 2, 4, 6, 8, 10]                        |
-| chromatic          | [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]     |
-
-</details>
+> **Note**: Check the file [scales.json](./assets/scales.json) for all available scales.
 
 ## License
 
