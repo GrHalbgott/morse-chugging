@@ -15,9 +15,14 @@ def main():
     morse_data = utils.encode_to_morse(file_manager.load_from_file(args.input_file))
 
     logger.info("Generating MIDI data...")
-    midi = midi_generator.morse_to_midi(
-        morse_data, args.tempo, file_manager.load_asset("midi_notes")[args.root_note], args.song, args.scale
+    morse_to_midi_converter = midi_generator.MorseToMidi(
+        morse_code=morse_data,
+        tempo=args.tempo,
+        root_note=file_manager.load_asset("midi_notes")[args.root_note],
+        scale=args.scale,
+        song=args.song,
     )
+    midi = morse_to_midi_converter.convert()
 
     logger.info("Saving MIDI file...")
     file_manager.save_to_file(args.output_file, midi)

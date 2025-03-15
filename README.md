@@ -78,7 +78,7 @@ When using the `-s` flag, you have to provide a scale name as argument. Choose o
 | Scale Name         | Notes as intervals from root note          |
 |--------------------|--------------------------------------------|
 | major              | [0, 2, 4, 5, 7, 9, 11]                     |
-| natural_minor      | [0, 2, 3, 5, 7, 8, 10]                     |
+| minor              | [0, 2, 3, 5, 7, 8, 10]                     |
 | harmonic_minor     | [0, 2, 3, 5, 7, 8, 11]                     |
 | dorian             | [0, 2, 3, 5, 7, 9, 10]                     |
 | mixolydian         | [0, 2, 4, 5, 7, 9, 10]                     |
