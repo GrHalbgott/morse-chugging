@@ -5,12 +5,12 @@
 import argparse
 import logging
 
-import modules.file_manager as file_manager
+import modules.file_handler as file_handler
 
 
 def encode_to_morse(text):
     """Encode text to Morse code."""
-    morse_dict = file_manager.load_asset("morse_dict")
+    morse_dict = file_handler.load_asset("morse_dict")
     morse_code = []
     for char in text.upper():
         if char == " ":
@@ -83,8 +83,8 @@ def args_parser():
     return parser
 
 
-def init_logger(name, log_file_name=None):
-    """Set up a logger instance with stream and file logger."""
+def init_logger(name):
+    """Set up a stream logger instance."""
     logger = logging.getLogger(name)
     logger.setLevel(logging.INFO)
     logger.propagate = False
@@ -97,12 +97,5 @@ def init_logger(name, log_file_name=None):
     streamhandler.setLevel(logging.INFO)
     streamhandler.setFormatter(formatter)
     logger.addHandler(streamhandler)
-    # Log file handler
-    if log_file_name:
-        assert log_file_name.parent.exists(), "Error during logger setup: Directory of log file does not exist."
-        filehandler = logging.FileHandler(filename=log_file_name)
-        filehandler.setLevel(logging.INFO)
-        filehandler.setFormatter(formatter)
-        logger.addHandler(filehandler)
 
     return logger

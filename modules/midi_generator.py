@@ -5,7 +5,7 @@
 import random
 from midiutil import MIDIFile
 
-import modules.file_manager as file_manager
+import modules.file_handler as file_handler
 
 
 class MorseToMidi:
@@ -139,7 +139,7 @@ class MorseToMidi:
 
     def convert(self):
         if self.scale:
-            scale_notes = file_manager.load_asset("scales")[self.scale]
+            scale_notes = file_handler.load_asset("scales")[self.scale]
             weights = [len(scale_notes) if num == 0 else 1 for num in scale_notes]
 
         time = 1
