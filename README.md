@@ -46,14 +46,14 @@ poetry update
 **Example**:
 
 ```shell
-python main.py -i example/example.txt -t 120 -r E2 -s harmonic_minor --song
+python src/main.py -i example/example.txt -t 120 -r E2 -s harmonic_minor --song
 ```
 
 **Usage**:
 
 ```shell
-python main.py -h
-usage: main.py [-h] -i [-o] [-t] [-r] [-s] [--song]
+python src/main.py -h
+usage: src/main.py [-h] -i [-o] [-t] [-r] [-s] [--song]
 
 Translate (text to) Morse code to a MIDI song full of (melodic) chugging.
 
