@@ -18,7 +18,16 @@ class MorseToMidi:
 
         self.sixteenth_note = 0.25
         self.eight_note = 0.5
+        self.half_note = 2
         self.midi, self.tracks = self.create_midi_file()
+
+        self.drum_notes = {
+            "bass_drum": 35,
+            "snare": 40,
+            "china": 52,
+            "hi-hat": 46,
+            "crash": 49,
+        }
 
     def create_midi_file(self):
         if self.song:
@@ -54,51 +63,86 @@ class MorseToMidi:
             return midi, {"guitar": (guitar_track, guitar_channel)}
 
     def enhance_drums(self, total_time):
-        drum_notes = {
-            "snare": 40,
-            "china": 52,
-            "crash": 49,
-        }
-
+        # China & Hi-hat
+        if total_time > 12 * 4:
+            for i in range(1, int(total_time), 8 * 4):
+                pitch = self.drum_notes["china"] if (i // (8 * 4)) % 2 == 0 else self.drum_notes["hi-hat"]
+                for time in range(i, min(i + 8 * 4, int(total_time))):
+                    self.midi.addNote(
+                        track=self.tracks["drums"][0],
+                        channel=self.tracks["drums"][1],
+                        pitch=pitch,
+                        time=time,
+                        duration=self.sixteenth_note,
+                        volume=100,
+                    )
         # China
-        for time in range(0, int(total_time)):  # every beat
-            self.midi.addNote(
-                track=self.tracks["drums"][0],
-                channel=self.tracks["drums"][1],
-                pitch=drum_notes["china"],
-                time=time,
-                duration=self.sixteenth_note,
-                volume=100,
-            )
+        else:
+            for time in range(1, int(total_time)):
+                self.midi.addNote(
+                    track=self.tracks["drums"][0],
+                    channel=self.tracks["drums"][1],
+                    pitch=self.drum_notes["china"],
+                    time=time,
+                    duration=self.sixteenth_note,
+                    volume=100,
+                )
 
         # Snare
-        for time in range(2, int(total_time), 4):  # start on 3rd beat and repeat every 4 beats
+        for time in range(3, int(total_time), 4):  # start on 3rd beat and repeat every 4 beats
             self.midi.addNote(
                 track=self.tracks["drums"][0],
                 channel=self.tracks["drums"][1],
-                pitch=drum_notes["snare"],
+                pitch=self.drum_notes["snare"],
                 time=time,
                 duration=self.sixteenth_note,
                 volume=100,
             )
 
         # Crash
-        for time in range(0, int(total_time), 16):  # start on 1st and repeat every 16 beats
+        for time in range(1, int(total_time), 16):  # start on 1st and repeat every 16 beats
             self.midi.addNote(
                 track=self.tracks["drums"][0],
                 channel=self.tracks["drums"][1],
-                pitch=drum_notes["crash"],
+                pitch=self.drum_notes["crash"],
                 time=time,
                 duration=self.sixteenth_note,
                 volume=100,
             )
+
+        # Final hit
+        time = int(total_time) + total_time % 1 - self.sixteenth_note
+        self.midi.addNote(
+            track=self.tracks["drums"][0],
+            channel=self.tracks["drums"][1],
+            pitch=self.drum_notes["bass_drum"],
+            time=time,
+            duration=self.half_note,
+            volume=100,
+        )
+        self.midi.addNote(
+            track=self.tracks["drums"][0],
+            channel=self.tracks["drums"][1],
+            pitch=self.drum_notes["snare"],
+            time=time,
+            duration=self.half_note,
+            volume=100,
+        )
+        self.midi.addNote(
+            track=self.tracks["drums"][0],
+            channel=self.tracks["drums"][1],
+            pitch=self.drum_notes["crash"],
+            time=time,
+            duration=self.half_note,
+            volume=100,
+        )
 
     def convert(self):
         if self.scale:
             scale_notes = file_manager.load_asset("scales")[self.scale]
             weights = [len(scale_notes) if num == 0 else 1 for num in scale_notes]
 
-        time = 0
+        time = 1
         for symbol in self.morse_code:
             if symbol == ".":
                 duration = self.sixteenth_note  # Short duration for dot (16)
@@ -140,7 +184,7 @@ class MorseToMidi:
                 self.midi.addNote(
                     track=self.tracks["drums"][0],
                     channel=self.tracks["drums"][1],
-                    pitch=35,
+                    pitch=self.drum_notes["bass_drum"],
                     time=time,
                     duration=duration,
                     volume=100,
