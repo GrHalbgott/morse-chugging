@@ -46,7 +46,7 @@ poetry update
 **Example**:
 
 ```shell
-python main.py -i text.txt -t 169 -r C3
+python main.py -i example/example.txt -t 120 -r E2 -s harmonic_minor --song
 ```
 
 **Usage**:
@@ -64,16 +64,15 @@ required arguments:
   -i, --input_file      Input text file.
 
 optional arguments:
-  -o, --output_file     Name of output MIDI file. Default: midi_output.mid.
+  -o, --output_file     Name of output MIDI file. Default: example/midi_output.
   -t, --tempo           Tempo of the MIDI file. Default: 142 bpm.
   -r, --root_note       Root note on guitar (bass is an octave lower). Default: B0.
   -s, --scale           Snap to scale. Default: None (stay at root note).
   --song                Create full song (guitar, bass, drums)? Otherwise only one track.
 ```
 
-### Available scales
-
-When using the `-s` flag, you have to provide a scale name as argument. Choose one of the following available scales:
+<details>
+    <summary><b>Available scales</b></summary>
 
 | Scale Name         | Notes as intervals from root note          |
 |--------------------|--------------------------------------------|
@@ -91,6 +90,8 @@ When using the `-s` flag, you have to provide a scale name as argument. Choose o
 | whole_tone1        | [0, 1, 3, 5, 7, 9, 11]                     |
 | whole_tone2        | [0, 2, 4, 6, 8, 10]                        |
 | chromatic          | [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]     |
+
+</details>
 
 ## License
 

@@ -43,8 +43,8 @@ def args_parser():
         dest="output_file",
         type=str,
         metavar="\b",
-        help="Name of output MIDI file. Default: midi_output.mid.",
-        default="midi_output.mid",
+        help="Name of output MIDI file. Default: example/midi_output.",
+        default="example/midi_output",
     )
     optional_args.add_argument(
         "-t",

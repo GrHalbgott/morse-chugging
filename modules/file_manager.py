@@ -19,5 +19,5 @@ def load_asset(filename):
 
 def save_to_file(output_file, midi):
     """Save content to a file."""
-    with open(output_file, "wb") as output_file:
+    with open(f"{output_file}.mid", "wb") as output_file:
         midi.writeFile(output_file)
