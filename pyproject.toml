@@ -9,7 +9,8 @@ license = {text = "MIT"}
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
-    "midiutil (>=1.2.1,<2.0.0)"
+    "midiutil (>=1.2.1,<2.0.0)",
+    "pytest (>=8.3.5,<9.0.0)"
 ]
 
 
