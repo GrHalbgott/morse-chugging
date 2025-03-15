@@ -25,7 +25,13 @@ def main():
     midi = morse_to_midi_converter.convert()
 
     logger.info("Saving MIDI file...")
-    file_manager.save_to_file(args.output_file, midi)
+    try:
+        file_manager.save_to_file(args.output_file, midi)
+    except PermissionError:
+        logger.error(
+            "Permission denied. Please close the output file and ensure that you have writing rights at that location."
+        )
+        exit(1)
 
     logger.info(f"Finished! Enjoy your chugging: {args.output_file}")
 
