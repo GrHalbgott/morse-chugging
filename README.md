@@ -1,7 +1,7 @@
 # Morse to (melodic) chugging
 
-Morse code is a beautiful thing - consisting solely of short and long notes, you can directly translate it to MIDI data.
-And this MIDI data, it rocks hard.
+Morse code is a beautiful thing - consisting solely of short and long notes as well as pauses, you can directly translate it to MIDI data.<br/>
+And this MIDI data, it rocks hard.<br/>
 My dear people, it's time for some hard-hitting chugs!
 
 ## Installation
@@ -9,7 +9,7 @@ My dear people, it's time for some hard-hitting chugs!
 ### 1. Setup new virtual environment and install poetry (package manager)
 
 > There are two supported options to create new virtual environments, Mamba/Conda and Venv + Pip.
-> We recommend using [Mamba](https://mamba.readthedocs.io/en/latest/index.html).
+> Using [Mamba](https://mamba.readthedocs.io/en/latest/index.html) is recommended.
 
 Using [Mamba](https://mamba.readthedocs.io/en/latest/index.html) (if using [Conda](https://docs.conda.io/en/latest/), replace `mamba` with `conda` below):
 
@@ -101,6 +101,18 @@ python src/main.py -i example/example.txt -o example/morse -t 100 -r C3
 ```
 
 Produces a Morse code played by a piano with tempo 100 bpm and root note C3 without any song structure.
+
+## Contribution
+
+Any advice, proposal for improvement, or question is welcome on all communication channels!
+
+If you want to contribute code, please use pre-commit by running:
+
+```shell
+pre-commit install
+```
+
+Using this, it is ensured that the code you provide suits the custom formatting rules before committing or creating a pull request.
 
 ## License
 

@@ -10,7 +10,8 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "midiutil (>=1.2.1,<2.0.0)",
-    "pytest (>=8.3.5,<9.0.0)"
+    "pytest (>=8.3.5,<9.0.0)",
+    "pre-commit (>=4.1.0,<5.0.0)"
 ]
 
 
