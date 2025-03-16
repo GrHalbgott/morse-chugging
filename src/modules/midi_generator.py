@@ -71,7 +71,9 @@ class MorseToMidi:
 
     def enhance_drums(self, total_time):
         # First hits
-        for time in range(2, self.intro_pause):
+        for time in range(
+            max(self.intro_pause - 2, 0), self.intro_pause
+        ):  # start 2 beats before, but not before 0
             self.midi.addNote(
                 track=self.tracks["drums"][0],
                 channel=self.tracks["drums"][1],
@@ -82,8 +84,8 @@ class MorseToMidi:
             )
 
         # China & Hi-hat
-        if total_time > 12 * 4:
-            for i in range(self.intro_pause, int(total_time), 8 * 4):
+        if total_time > ((self.intro_pause + 10) * 4):  # 10 bars
+            for i in range(self.intro_pause, int(total_time), 8 * 4):  # repeat this block every 8 bars
                 pitch = self.drum_notes["china"] if (i // (8 * 4)) % 2 == 0 else self.drum_notes["hi-hat"]
                 for time in range(i, min(i + 8 * 4, int(total_time))):
                     self.midi.addNote(
