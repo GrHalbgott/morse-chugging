@@ -52,8 +52,8 @@ def args_parser():
         dest="tempo",
         type=int,
         metavar="\b",
-        help="Tempo of the MIDI file. Default: 142 bpm.",
-        default=142,
+        help="Tempo of the MIDI file. Default: 120 bpm.",
+        default=120,
     )
     optional_args.add_argument(
         "-r",
@@ -61,8 +61,8 @@ def args_parser():
         dest="root_note",
         type=str,
         metavar="\b",
-        help="Root note on guitar (bass is an octave lower). Default: B0.",
-        default="B0",
+        help="Root note on guitar (bass is an octave lower). Default: E1.",
+        default="E1",
     )
     optional_args.add_argument(
         "-s",

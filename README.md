@@ -61,8 +61,8 @@ required arguments:
 
 optional arguments:
   -o, --output_file     Name of output MIDI file. Default: example/midi_output.
-  -t, --tempo           Tempo of the MIDI file. Default: 142 bpm.
-  -r, --root_note       Root note on guitar (bass is an octave lower). Default: B0.
+  -t, --tempo           Tempo of the MIDI file. Default: 120 bpm.
+  -r, --root_note       Root note on guitar (bass is an octave lower). Default: E1.
   -s, --scale           Scale to create melody. Default: None (stay at root note).
   --song                Create full song (guitar, bass, drums)? Otherwise only one track (piano).
 ```
@@ -72,7 +72,7 @@ optional arguments:
 ### Example 1: chugs song
 
 ```shell
-python src/main.py -i example/example.txt -o example/chugs --song
+python src/main.py -i example/example.txt -o example/chugs -t 142 --song
 ```
 
 Produces a track with three instruments (Guitar, Bass, Drums). The tempo is 142 bpm, the root note is B0 and the instruments only play the root note. The intro consists of a half note pause and two ride hits, each a quarter note long, then the chugging starts. On the first beat of every 4 bars, a crash is played, a china on every beat. For tracks longer than 12 bars, the drum introduces variability by looping through 8 bars of china cymbal and 8 bars of open hi-hat. The ending is a final hit of bass drum, snare, and a crash.
@@ -81,7 +81,7 @@ Produces a track with three instruments (Guitar, Bass, Drums). The tempo is 142 
 ### Example 2: melodic riffage
 
 ```shell
-python src/main.py -i example/example.txt -o example/melodic_riffage -t 120 -r D2 -s harmonic_minor --song
+python src/main.py -i example/example.txt -o example/melodic_riffage -r D1 -s harmonic_minor --song
 ```
 
 Produces a track with three instruments (Guitar, Bass, Drums). The tempo is 120 bpm, the root note is D2 and the instruments play a melody based on the harmonic minor scale (root note still plays more often than the other notes). Otherwise similar song structure as above.
@@ -89,10 +89,18 @@ Produces a track with three instruments (Guitar, Bass, Drums). The tempo is 120 
 ### Example 3: melody creation
 
 ```shell
-python src/main.py -i example/example.txt -o example/melody -t 80 -r E2 -s blues_minor
+python src/main.py -i example/example.txt -o example/melody -t 80 -r A2 -s blues_minor
 ```
 
 Produces a melody line played by a piano with tempo 80 bpm, root note E2 and in scale blues minor. All intro and outro pauses are omitted (so no song structure), making the melody ready to be used in you DAW of choice.
+
+### Example 4: text to Morse
+
+```shell
+python src/main.py -i example/example.txt -o example/morse -t 100 -r C3
+```
+
+Produces a Morse code played by a piano with tempo 100 bpm and root note C3 without any song structure.
 
 ## License
 
