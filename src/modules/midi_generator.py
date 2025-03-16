@@ -9,17 +9,17 @@ import modules.file_handler as file_handler
 
 
 class MorseToMidi:
-    def __init__(self, morse_code, tempo, root_note, scale, song):
+    def __init__(self, morse_code, args):
         self.morse_code = morse_code
-        self.tempo = tempo
-        self.root_note = root_note
-        self.scale = scale
-        self.song = song
+        self.tempo = args.tempo
+        self.root_note = file_handler.load_asset("midi_notes")[args.root_note]
+        self.scale = args.scale
+        self.song = args.song
 
         self.sixteenth_note = 0.25
         self.eight_note = 0.5
         self.half_note = 2
-        self.intro_pause = 4 if song else 0
+        self.start_time = 4 if self.song else 0
         self.midi, self.tracks = self.create_midi_file()
 
         self.drum_notes = {
@@ -70,10 +70,9 @@ class MorseToMidi:
             return midi, {"piano": (piano_track, piano_channel)}
 
     def enhance_drums(self, total_time):
+        intro_pause = max(self.start_time - 2, 0)
         # First hits
-        for time in range(
-            max(self.intro_pause - 2, 0), self.intro_pause
-        ):  # start 2 beats before, but not before 0
+        for time in range(intro_pause, self.start_time):  # start 2 beats before, but not before 0
             self.midi.addNote(
                 track=self.tracks["drums"][0],
                 channel=self.tracks["drums"][1],
@@ -84,8 +83,8 @@ class MorseToMidi:
             )
 
         # China & Hi-hat
-        if total_time > ((self.intro_pause + 10) * 4):  # 10 bars
-            for i in range(self.intro_pause, int(total_time), 8 * 4):  # repeat this block every 8 bars
+        if total_time > ((intro_pause + 2) * 4):  # 10 bars
+            for i in range(self.start_time, int(total_time), 8 * 4):  # repeat this block every 8 bars
                 pitch = self.drum_notes["china"] if (i // (8 * 4)) % 2 == 0 else self.drum_notes["hi-hat"]
                 for time in range(i, min(i + 8 * 4, int(total_time))):
                     self.midi.addNote(
@@ -98,7 +97,7 @@ class MorseToMidi:
                     )
         # China
         else:
-            for time in range(self.intro_pause, int(total_time)):
+            for time in range(self.start_time, int(total_time)):
                 self.midi.addNote(
                     track=self.tracks["drums"][0],
                     channel=self.tracks["drums"][1],
@@ -110,7 +109,7 @@ class MorseToMidi:
 
         # Snare
         for time in range(
-            self.intro_pause + 2, int(total_time), 4
+            self.start_time + 2, int(total_time), 4
         ):  # start on 3rd beat and repeat every 4 beats
             self.midi.addNote(
                 track=self.tracks["drums"][0],
@@ -122,7 +121,7 @@ class MorseToMidi:
             )
 
         # Crash
-        for time in range(self.intro_pause, int(total_time), 16):  # start on 1st and repeat every 16 beats
+        for time in range(self.start_time, int(total_time), 16):  # start on 1st and repeat every 16 beats
             self.midi.addNote(
                 track=self.tracks["drums"][0],
                 channel=self.tracks["drums"][1],
@@ -164,7 +163,7 @@ class MorseToMidi:
             scale_notes = file_handler.load_asset("scales")[self.scale]
             weights = [len(scale_notes) if num == 0 else 1 for num in scale_notes]
 
-        time = self.intro_pause
+        time = self.start_time
         for symbol in self.morse_code:
             if symbol == ".":
                 duration = self.sixteenth_note  # Short duration for dot (16)
