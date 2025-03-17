@@ -1,8 +1,14 @@
 # Morse to (melodic) chugging
 
-Morse code is a beautiful thing - consisting solely of short and long notes as well as pauses, you can directly translate it to MIDI data.<br/>
-And this MIDI data, it rocks hard.<br/>
-My dear people, it's time for some hard-hitting chugs!
+Morse code is a beautiful thing - consisting solely of short and long notes as well as pauses, you can directly translate it to MIDI data. And this MIDI data, it rocks hard.
+
+**My dear people, it's time for some hard-hitting chugs!**
+
+> Possible applications (checkout [examples](./README.md#example-1-chugs-song)):
+> - Create a melody line to be directly used in the DAW of your choice based on a Morse code, which is encoded from an input text on-the-fly
+> - Create a MIDI song with a given song structure and three instruments playing chugs or melodies based on a Morse code, which is encoded from an input text on-the-fly
+
+***More to come, stay tuned!***
 
 ## Installation
 
