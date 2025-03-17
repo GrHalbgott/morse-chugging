@@ -64,6 +64,7 @@ optional arguments:
   -t, --tempo           Tempo of the MIDI file. Default: 120 bpm.
   -r, --root_note       Root note on guitar (bass is an octave lower). Default: E1.
   -s, --scale           Scale to create melody. Default: None (stay at root note).
+  -oct, --octaves       Octaves to play the scale in (1-4). Default: 1.
   --song                Create full song (guitar, bass, drums)? Otherwise only one track (piano).
 ```
 
@@ -84,15 +85,15 @@ Produces a track with three instruments (Guitar, Bass, Drums). The tempo is 142 
 python src/main.py -i example/example.txt -o example/melodic_riffage -r D1 -s harmonic_minor --song
 ```
 
-Produces a track with three instruments (Guitar, Bass, Drums). The tempo is 120 bpm, the root note is D2 and the instruments play a melody based on the harmonic minor scale (root note still plays more often than the other notes). Otherwise similar song structure as above.
+Produces a track with three instruments (Guitar, Bass, Drums). The tempo is 120 bpm, the root note is D2 and the instruments play a melody based on the harmonic minor scale with a range of one octave (root note still plays more often than the other notes). Otherwise similar song structure as above.
 
 ### Example 3: melody creation
 
 ```shell
-python src/main.py -i example/example.txt -o example/melody -t 80 -r A2 -s blues_minor
+python src/main.py -i example/example.txt -o example/melody -t 80 -r A2 -s blues_minor -oct 3
 ```
 
-Produces a melody line played by a piano with tempo 80 bpm, root note E2 and in scale blues minor. All intro and outro pauses are omitted (so no song structure), making the melody ready to be used in you DAW of choice.
+Produces a melody line played by a piano with tempo 80 bpm in scale blues minor with a range of 3 octaves from the root note E2. All intro and outro pauses are omitted (so no song structure), making the melody ready to be used in you DAW of choice.
 
 ### Example 4: text to Morse
 

@@ -14,6 +14,7 @@ class MorseToMidi:
         self.tempo = args.tempo
         self.root_note = file_handler.load_asset("midi_notes")[args.root_note]
         self.scale = args.scale
+        self.octaves = args.octaves
         self.song = args.song
 
         self.sixteenth_note = 0.25
@@ -69,8 +70,24 @@ class MorseToMidi:
 
             return midi, {"piano": (piano_track, piano_channel)}
 
+    def create_scale_weights(self):
+        base_scale_notes = file_handler.load_asset("scales")[self.scale]
+        scale_notes = []
+        weights = []
+
+        for octave in range(self.octaves):
+            octave_weight = ((self.octaves - octave) * 3) - 1  # higher weight for lower octaves
+            for note in base_scale_notes:
+                scale_notes.append(note + 12 * octave)  # extend scale to multiple octaves
+                weights.append(octave_weight)
+
+        weights[0] = len(weights) * (self.octaves + 1)  # higher weight for root note
+
+        return scale_notes, weights
+
     def enhance_drums(self, total_time):
         intro_pause = max(self.start_time - 2, 0)
+
         # First hits
         for time in range(intro_pause, self.start_time):  # start 2 beats before, but not before 0
             self.midi.addNote(
@@ -160,8 +177,7 @@ class MorseToMidi:
 
     def convert(self):
         if self.scale:
-            scale_notes = file_handler.load_asset("scales")[self.scale]
-            weights = [len(scale_notes) if num == 0 else 1 for num in scale_notes]
+            scale_notes, weights = self.create_scale_weights()
 
         time = self.start_time
         for symbol in self.morse_code:

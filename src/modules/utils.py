@@ -74,6 +74,15 @@ def args_parser():
         default=None,
     )
     optional_args.add_argument(
+        "-oct",
+        "--octaves",
+        dest="octaves",
+        type=int,
+        metavar="\b",
+        help="Octaves to play the scale in (1-4). Default: 1.",
+        default=1,
+    )
+    optional_args.add_argument(
         "--song",
         dest="song",
         action="store_true",
