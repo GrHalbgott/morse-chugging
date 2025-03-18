@@ -79,7 +79,7 @@ optional arguments:
 ### Example 1: chugs song
 
 ```shell
-python src/main.py -i example/example.txt -o example/chugs -t 142 --song
+python src/main.py -i example/example.txt -o example/chugs -r B0 -t 142 --song
 ```
 
 Produces a track with three instruments (Guitar, Bass, Drums). The tempo is 142 bpm, the root note is B0 and the instruments only play the root note. The intro consists of a half note pause and two ride hits, each a quarter note long, then the chugging starts. On the first beat of every 4 bars, a crash is played, a china on every beat. For tracks longer than 12 bars, the drum introduces variability by looping through 8 bars of china cymbal and 8 bars of open hi-hat. The ending is a final hit of bass drum, snare, and a crash.
@@ -88,10 +88,10 @@ Produces a track with three instruments (Guitar, Bass, Drums). The tempo is 142 
 ### Example 2: melodic riffage
 
 ```shell
-python src/main.py -i example/example.txt -o example/melodic_riffage -r D1 -s harmonic_minor --song
+python src/main.py -i example/example.txt -o example/melodic_riffage -s harmonic_minor --song
 ```
 
-Produces a track with three instruments (Guitar, Bass, Drums). The tempo is 120 bpm, the root note is D2 and the instruments play a melody based on the harmonic minor scale with a range of one octave (root note still plays more often than the other notes). Otherwise similar song structure as above.
+Produces a track with three instruments (Guitar, Bass, Drums). The tempo is 120 bpm, the root note is E1 and the instruments play a melody based on the harmonic minor scale with a range of one octave (root note still plays more often than the other notes). Otherwise similar song structure as above.
 
 ### Example 3: melody creation
 
@@ -108,6 +108,14 @@ python src/main.py -i example/example.txt -o example/morse -t 100 -r C3
 ```
 
 Produces a Morse code played by a piano with tempo 100 bpm and root note C3 without any song structure.
+
+### Example 5: utter chaos
+
+```shell
+python src/main.py -i example/example.txt -o example/utter_chaos -t 269 -r C0 -oct 9 -s chromatic --song
+```
+
+It's exactly that - utter chaos, with the full range of octaves, nearly every note possible, paired with thundering drums, and delivered in a lightning fast tempo. Utter chaos.
 
 ## Contribution
 
